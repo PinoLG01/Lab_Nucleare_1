@@ -16,7 +16,7 @@ def to_int(x):
         return number
     except ValueError:
         return x
-    
+       
 def integrate(x, y) -> float:
     tot: float = np.trapz(x=x, y=y)
     return tot
@@ -70,10 +70,11 @@ sincos_mod = lmfit.Model(sincos)
 #param_values = dict(x=test[:,0], A=230, B=1.9e-17, C=3e-10, D=2e-3, E=4e-5, F=0.1)
 #res = mod.fit(data=yval, params=params, x=xval, weights=1/yerr, nan_policy="omit")
 
-x = np.linspace(0, 100, 200)
-y = np.linspace(1, 2, 200)
+if __name__ == "__main__":
+    x = np.linspace(0, 100, 200)
+    y = np.linspace(1, 2, 200)
 
-mod = GaussianModel() + landau_mod
-params = mod.make_params(amplitude=5, center=10, sigma=1, mu=30, xi=dict(value=2, min=0.01), A=1)
-res = mod.fit(data=y, params=params, x=x, weights=1/y, nan_policy="omit")
-print(res.fit_report())
+    mod = GaussianModel() + landau_mod
+    params = mod.make_params(amplitude=5, center=10, sigma=1, mu=30, xi=dict(value=2, min=0.01), A=1)
+    res = mod.fit(data=y, params=params, x=x, weights=1/y, nan_policy="omit")
+    print(res.fit_report())
